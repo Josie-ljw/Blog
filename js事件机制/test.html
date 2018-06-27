@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>js事件机制</title>
+  <style>
+    #s1 {
+      background-color: yellow;
+      padding: 30px;
+      width: 340px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #s2 {
+      width: 200px;
+      height: 200px;
+      background-color: #ccc;
+    }
+    .container {
+      background-color: #f5f5f5;
+      padding: 20px;
+      width: 150px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    .bg-pink {
+      background-color: pink;
+    }
+    .answer {
+      display: none;
+      background-color: #f6e4e7;
+      padding: 20px;
+    }
+    .answer li {
+      margin-left: 20px;
+    }
+  </style>
+  <script src="https://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+  <div id="s1">s1
+    <div id="s2">s2
+      <!-- <div id="s3" style="background-color: pink;padding:20px;" onclick="console.log(3333);">s3</div> -->
+    </div>
+  </div>
+
+  <div><a id="link" href="https://www.alipay.com">这是一个链接</a></div>
+
+  <div class="container">
+    <h2><a class="page-link" href="https://www.alipay.com">标题</a></h2>
+    <div class="content">
+      这有一段文字内容
+    </div>
+  </div>
+
+  <button class="btn-why">为什么？</button>
+  <ul class="answer">
+    <div>但是，在jQuery中，我们常用return false来阻止浏览器的默认行为，那”return false“到底做了什么？</div>
+    <div>当你每次调用”return false“的时候，它实际上做了3件事情：</div>
+    <li><b>event.preventDefault();</b></li>
+    <li><b>event.stopPropagation();</b></li>
+    <li><b>停止回调函数执行并立即返回。</b></li>
+    <div>这3件事中用来阻止浏览器继续执行默认行为的只有preventDefault，除非你想要停止事件冒泡，否则使用return false会为你的代码埋下很大的隐患。</div>
+  </ul>
+  <script type="text/javascript">
+
+  s1.addEventListener("click",function(e){e.cancelBubble = true;console.log(e.cancelBubble,"s1 冒泡事件");},false);
+  s1.addEventListener("click",function(e){ console.log("s1 捕获事件");},true);
+  s2.addEventListener("click",function(e){ console.log("s2 冒泡事件");},false);
+  s2.addEventListener("click",function(e){ console.log("s2 捕获事件");},true);
+  // s3.onclick = null;
+
+  // s1.addEventListener("click",function(e){ event.stopPropagation();console.log("只有s1触发捕获事件");},true);
+
+  // 阻止默认事件方法1
+
+  // link.onclick = function() {
+  //   return false;
+  // }
+
+  // 阻止默认事件方法2
+
+  link.addEventListener("click", function(e){
+    var event = e || window.event;
+    event.preventDefault( );      //阻止默认事件
+  },true);
+
+  // 阻止该事件向别的元素传播
+
+  // s2.addEventListener('click', function (event) {
+  //   event.stopPropagation();
+  //   console.log(1);
+  // });
+
+  // s2.addEventListener('click', function(event) {
+  //   // 会触发
+  //   console.log(2);
+  // });
+
+  // 彻底阻止该事件传播，不再触发后面所有的click监听函数
+  // s1.addEventListener('click', function(event) {
+  //   // 不会被触发
+  //   console.log(111);
+  // });
+  // s1.addEventListener('click', function (event) {
+  //   event.stopImmediatePropagation();
+  //   // event.stopPropagation();
+  //   console.log(1);
+  // });
+
+  // s1.addEventListener('click', function(event) {
+  //   // 不会被触发
+  //   console.log(2);
+  // });
+
+
+
+  $(".page-link").click(function (e) {
+    $('.content').html($(this).text());
+    return true;
+    // e.preventDefault();
+  });
+
+  $('.container').click(function() {
+    $(this).addClass('bg-pink');
+  })
+
+
+  $('.btn-why').click(function() {
+    $('.answer').show();
+  })
+  </script>
+</body>
+</html>

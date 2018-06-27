@@ -13,7 +13,7 @@
 8. 常用技巧
 
 #### js事件的捕获和冒泡图
-![js事件的捕获和冒泡](./bubble.png)
+![js事件的捕获和冒泡](https://github.com/Josie-ljw/Blog/blob/master/js-event-system/bubble.png)
 
 ### 举个例子：
 点击s2，s1分别会打印什么？
@@ -55,7 +55,7 @@ s2上注册了冒泡和捕获事件，先注册的冒泡后注册的捕获，则
 
 ### jQuery的on事件是冒泡
 
-![jquery的on事件源码](./on.png)
+![jquery的on事件源码](https://github.com/Josie-ljw/Blog/blob/master/js-event-system/on.png)
 
 ## 常用技巧
 
@@ -94,7 +94,7 @@ ele.onclik = null;   //解绑单击事件，将onlick属性设为null即可
 	这3件事中用来阻止浏览器继续执行默认行为的只有preventDefault，除非你想要停止事件冒泡，否则使用return false会为你的代码埋下很大的隐患。</td></table>
 	下面贴上jQuery的源码
 	</br></br>
-	![jQuery->return false 源码](./jQuery-return-false.png)
+	![jQuery->return false 源码](https://github.com/Josie-ljw/Blog/blob/master/js-event-system/jQuery-return-false.png)
 	
 2. **event.preventDefault( );** 阻止通过 addEventListener( ) 添加的事件的默认事件
 	

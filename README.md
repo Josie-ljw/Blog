@@ -9,3 +9,6 @@
 
 ### 2018.06
 *	[Js事件机制](https://github.com/Josie-ljw/Blog/tree/master/js-event-system)
+* [关于this指向的详细总结]()
+
+
